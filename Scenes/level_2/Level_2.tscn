@@ -1,0 +1,206 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://default_env.tres" type="Environment" id=2]
+[ext_resource path="res://Textures/drive-download-20210104T043830Z-001/Glass_Frosted_001_roughness.jpg" type="Texture" id=3]
+[ext_resource path="res://Textures/drive-download-20210104T043830Z-001/Glass_Frosted_001_height.png" type="Texture" id=4]
+[ext_resource path="res://Textures/drive-download-20210104T043830Z-001/Glass_Frosted_001_normal.jpg" type="Texture" id=5]
+[ext_resource path="res://Textures/drive-download-20210104T043830Z-001/Glass_Frosted_001_ambientOcclusion.jpg" type="Texture" id=6]
+[ext_resource path="res://Textures/Water/Water_002_DISP.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Water/Water_002_OCC.jpg" type="Texture" id=8]
+[ext_resource path="res://Textures/Water/Water_002_COLOR.jpg" type="Texture" id=9]
+[ext_resource path="res://Textures/Water/Water_002_ROUGH.jpg" type="Texture" id=10]
+[ext_resource path="res://Textures/Water/Water_002_NORM.jpg" type="Texture" id=11]
+[ext_resource path="res://Scenes/world/Goal.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/level_2/Level_2.gd" type="Script" id=13]
+[ext_resource path="res://interface/interfaceHide.anim" type="Animation" id=14]
+
+[sub_resource type="SphereShape" id=1]
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_vertex_lighting = true
+params_specular_mode = 4
+metallic = 1.0
+roughness = 0.17
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_vertex_lighting = true
+albedo_texture = ExtResource( 9 )
+roughness_texture = ExtResource( 10 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 11 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 8 )
+ao_on_uv2 = false
+ao_texture_channel = 4
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 7 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=7]
+
+[sub_resource type="CubeMesh" id=8]
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_world_triplanar = true
+metallic = 1.0
+metallic_texture_channel = 4
+roughness = 0.05
+roughness_texture = ExtResource( 3 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.65
+normal_texture = ExtResource( 5 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 6 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 4 )
+uv1_triplanar = true
+
+[node name="Level_2" type="Spatial"]
+script = ExtResource( 13 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="Sphere" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -12 )
+
+[node name="RigidBody" type="RigidBody" parent="Sphere"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Sphere/RigidBody"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Sphere/RigidBody"]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Floor" type="Spatial" parent="."]
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor/StaticBody"]
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 2 )
+
+[node name="Wall" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 50, -51, 21, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="StaticBody" type="StaticBody" parent="Wall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall/StaticBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall/StaticBody"]
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="Wall2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 50, 51, 21, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="StaticBody" type="StaticBody" parent="Wall2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall2/StaticBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall2/StaticBody"]
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="Wall3" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -50, 0, 20, 0, 1, 0, -2.18557e-06, 0, 21, -51 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="StaticBody" type="StaticBody" parent="Wall3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall3/StaticBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall3/StaticBody"]
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="Wall4" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -50, 0, 20, 0, 1, 0, -2.18557e-06, 0, 21, 51 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="StaticBody" type="StaticBody" parent="Wall4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall4/StaticBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall4/StaticBody"]
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="Wall5" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -50, 1, -8.74228e-07, -2.18557e-06, -1.11464e-07, -51, 2.43613e-13, 0, 41, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="StaticBody" type="StaticBody" parent="Wall5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall5/StaticBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall5/StaticBody"]
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Wall5/StaticBody/MeshInstance"]
+transform = Transform( 1, -9.43223e-08, 3.55271e-15, 0, 0.0196078, 8.08424e-17, -1.67037e-24, 1.65436e-24, 0.02, 0, 0, 0 )
+
+[node name="Goal" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/interfaceHide = ExtResource( 14 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="ready" from="." to="." method="_on_Level_2_ready"]
+[connection signal="body_entered" from="Goal" to="." method="_on_Goal_body_entered"]

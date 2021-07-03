@@ -1,0 +1,176 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://interface/GameMenu.gd" type="Script" id=1]
+[ext_resource path="res://interface/FinalMenuFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://interface/itchiologo_primary-100716005-large.3x2_1_32x32.jpg" type="Texture" id=3]
+[ext_resource path="res://interface/interfaceHide.anim" type="Animation" id=4]
+
+[node name="GameMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.77979
+margin_top = 3.77979
+margin_right = 3.77979
+margin_bottom = 3.77979
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main Screen" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 409.0
+margin_top = 149.0
+margin_right = 615.0
+margin_bottom = 451.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer/Main Screen"]
+margin_right = 206.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 2 )
+text = "3D Maze"
+align = 1
+
+[node name="Start" type="Button" parent="CenterContainer/Main Screen"]
+margin_top = 46.0
+margin_right = 206.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 2 )
+text = "Start"
+
+[node name="Controls" type="Button" parent="CenterContainer/Main Screen"]
+margin_top = 98.0
+margin_right = 206.0
+margin_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Controls"
+
+[node name="Itch Page" type="Button" parent="CenterContainer/Main Screen"]
+margin_top = 150.0
+margin_right = 206.0
+margin_bottom = 198.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Itch.io Page"
+icon = ExtResource( 3 )
+
+[node name="Settings" type="Button" parent="CenterContainer/Main Screen"]
+margin_top = 202.0
+margin_right = 206.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Settings"
+
+[node name="Exit Game" type="Button" parent="CenterContainer/Main Screen"]
+margin_top = 254.0
+margin_right = 206.0
+margin_bottom = 302.0
+custom_fonts/font = ExtResource( 2 )
+text = "Exit"
+
+[node name="Controls Page" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+margin_left = 388.0
+margin_top = 185.0
+margin_right = 636.0
+margin_bottom = 414.0
+
+[node name="Label" type="Label" parent="CenterContainer/Controls Page"]
+margin_right = 248.0
+margin_bottom = 177.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "[W] To Move Up
+[A] To Move Left
+[D] To Move Right
+[S] To Move Down"
+valign = 1
+
+[node name="Back From Controls" type="Button" parent="CenterContainer/Controls Page"]
+margin_top = 181.0
+margin_right = 248.0
+margin_bottom = 229.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+
+[node name="Settings Page" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+margin_left = 332.0
+margin_top = 249.0
+margin_right = 692.0
+margin_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Low Processor CheckButton" type="CheckButton" parent="CenterContainer/Settings Page"]
+margin_right = 360.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Low Processor Mode"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back From Settings" type="Button" parent="CenterContainer/Settings Page"]
+margin_top = 54.0
+margin_right = 360.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/interfaceHide = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 0.269531
+anchor_bottom = 0.07
+custom_fonts/font = ExtResource( 2 )
+text = "4/6/2021 12:24 AM"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="ready" from="." to="." method="_on_Control_ready"]
+[connection signal="pressed" from="CenterContainer/Main Screen/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer/Main Screen/Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="CenterContainer/Main Screen/Itch Page" to="." method="_on_Itch_Page_pressed"]
+[connection signal="pressed" from="CenterContainer/Main Screen/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="CenterContainer/Main Screen/Exit Game" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="CenterContainer/Controls Page/Back From Controls" to="." method="_on_Back_From_Controls_pressed"]
+[connection signal="toggled" from="CenterContainer/Settings Page/Low Processor CheckButton" to="." method="_on_Low_Processor_CheckButton_toggled"]
+[connection signal="pressed" from="CenterContainer/Settings Page/Back From Settings" to="." method="_on_Back_From_Settings_pressed"]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://interface/FinalMenu.gd" type="Script" id=1]
+[ext_resource path="res://interface/interfaceHide.anim" type="Animation" id=2]
+[ext_resource path="res://interface/FinalMenuFont.tres" type="DynamicFont" id=3]
+
+[node name="FinalMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Column" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 285.0
+margin_top = 250.0
+margin_right = 739.0
+margin_bottom = 350.0
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/Column"]
+margin_right = 454.0
+margin_bottom = 48.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Column/GridContainer"]
+margin_right = 454.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Level 1" type="Button" parent="CenterContainer/Column/GridContainer/HBoxContainer"]
+margin_right = 110.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Level 1"
+
+[node name="Level 2" type="Button" parent="CenterContainer/Column/GridContainer/HBoxContainer"]
+margin_left = 114.0
+margin_right = 225.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Level 2"
+
+[node name="Level 3" type="Button" parent="CenterContainer/Column/GridContainer/HBoxContainer"]
+margin_left = 229.0
+margin_right = 339.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Level 3"
+
+[node name="Level 4" type="Button" parent="CenterContainer/Column/GridContainer/HBoxContainer"]
+margin_left = 343.0
+margin_right = 454.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Level 4"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Column"]
+margin_top = 52.0
+margin_right = 454.0
+margin_bottom = 100.0
+
+[node name="Return to Main Menu" type="Button" parent="CenterContainer/Column/HBoxContainer"]
+margin_right = 299.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 3 )
+text = "Return to Main Menu"
+
+[node name="Exit Game" type="Button" parent="CenterContainer/Column/HBoxContainer"]
+margin_left = 303.0
+margin_right = 454.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Exit Game"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/interfaceHide = ExtResource( 2 )
+[connection signal="pressed" from="CenterContainer/Column/GridContainer/HBoxContainer/Level 1" to="." method="_on_Level_1_pressed"]
+[connection signal="pressed" from="CenterContainer/Column/GridContainer/HBoxContainer/Level 2" to="." method="_on_Level_2_pressed"]
+[connection signal="pressed" from="CenterContainer/Column/GridContainer/HBoxContainer/Level 3" to="." method="_on_Level_3_pressed"]
+[connection signal="pressed" from="CenterContainer/Column/GridContainer/HBoxContainer/Level 4" to="." method="_on_Level_4_pressed"]
+[connection signal="pressed" from="CenterContainer/Column/HBoxContainer/Return to Main Menu" to="." method="_on_Return_to_Main_Menu_pressed"]
+[connection signal="pressed" from="CenterContainer/Column/HBoxContainer/Exit Game" to="." method="_on_Exit_Game_pressed"]
